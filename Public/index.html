@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Ammu Nation — Inicio</title>
+  <style>
+    :root{
+      --bg:#0f1115; --card:#171a21; --muted:#8b95a7; --text:#e6e9ef; --accent:#4da3ff;
+      --ring: 0 0 0 2px rgba(77,163,255,.35); --radius:18px;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0; font-family:Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      background: radial-gradient(1200px 800px at 80% -10%, rgba(77,163,255,.12), transparent 60%),
+                  radial-gradient(1000px 700px at -10% 110%, rgba(124,255,193,.08), transparent 60%), var(--bg);
+      color:var(--text);
+    }
+    header{
+      display:flex; justify-content:space-between; align-items:center; padding:16px 20px;
+      position:sticky; top:0; background:rgba(15,17,21,.75); backdrop-filter:blur(6px);
+      border-bottom:1px solid rgba(255,255,255,.06);
+    }
+    .logo{font-weight:800}
+    .btn{
+      display:inline-block; padding:10px 14px; border-radius:12px; text-decoration:none; color:var(--text);
+      border:1px solid rgba(255,255,255,.12); background:#1c212b; font-weight:600;
+    }
+    .btn.primary{background:linear-gradient(180deg,#2a6bff,#1e57d6); border-color:transparent}
+    main{max-width:1100px; margin:56px auto; padding:0 20px; display:grid; gap:18px}
+    h1{margin:0 0 10px; font-size:42px; line-height:1.1}
+    p.lead{color:var(--muted); margin:0 0 18px; font-size:18px}
+
+    /* --------- MODALES SIN JS (usa :target) --------- */
+    .modal-backdrop{
+      position:fixed; inset:0; display:none; place-items:center; padding:20px; z-index:50;
+      background:rgba(0,0,0,.55);
+    }
+    /* Mostrar el modal cuando el hash apunte al id */
+    #login:target, #register:target{display:grid}
+
+    .modal{
+      width:100%; max-width:560px; background:var(--card);
+      border:1px solid rgba(255,255,255,.09); border-radius:20px;
+      box-shadow:0 20px 80px rgba(0,0,0,.5);
+      transform:translateY(10px); opacity:0; transition:opacity .15s, transform .15s;
+    }
+    #login:target .modal, #register:target .modal{transform:translateY(0); opacity:1}
+
+    .modal-header{
+      display:flex; justify-content:space-between; align-items:center; padding:14px 16px;
+      border-bottom:1px solid rgba(255,255,255,.08)
+    }
+    .close{color:var(--muted); text-decoration:none; font-weight:700; border:1px solid rgba(255,255,255,.12);
+      padding:6px 10px; border-radius:10px; background:#1b2029}
+    .modal-body{padding:18px}
+    form{display:grid; gap:12px}
+    .row{display:grid; grid-template-columns:1fr 1fr; gap:12px}
+    label.txt{font-size:13px; color:#cbd5e1}
+    input{
+      width:100%; padding:12px; border-radius:12px; border:1px solid rgba(255,255,255,.1);
+      background:#12161d; color:#e5e7eb; outline:none;
+    }
+    input:focus{border-color:var(--accent); box-shadow:var(--ring)}
+    .submit{
+      display:block; width:100%; text-align:center; padding:12px; border-radius:12px; text-decoration:none; color:#fff;
+      background:linear-gradient(180deg,#2a6bff,#1e57d6); font-weight:700; border:0;
+    }
+    .ghost{border:1px solid rgba(255,255,255,.12); background:#1c212b; color:#cbd5e1}
+
+    @media (max-width: 900px){ main{grid-template-columns:1fr} }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">Ammu Nation</div>
+    <nav>
+      <!-- Abren su formulario con :target -->
+      <a class="btn" href="#login">Iniciar sesión</a>
+      <a class="btn primary" href="#register">Crear cuenta</a>
+    </nav>
+  </header>
+
+  <main>
+    <section>
+      <h1>Tu armería online, con trámites al día</h1>
+      <p class="lead">Compra responsable, validación documental y retiro presencial en armerías autorizadas.</p>
+      <div style="display:flex; gap:10px; flex-wrap:wrap;">
+        <a class="btn primary" href="#register">Comenzar</a>
+        <a class="btn ghost" href="#login">Ya tengo cuenta</a>
+      </div>
+    </section>
+  </main>
+
+  <!-- MODAL: INICIAR SESIÓN -->
+  <div id="login" class="modal-backdrop" aria-hidden="true">
+    <div class="modal" role="dialog" aria-labelledby="loginTitle">
+      <div class="modal-header">
+        <strong id="loginTitle">Iniciar sesión</strong>
+        <a class="close" href="#" aria-label="Cerrar">✕</a>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div>
+            <label class="txt" for="loginEmail">Correo electrónico</label>
+            <input id="loginEmail" type="email" placeholder="tucorreo@dominio.cl" required>
+          </div>
+          <div>
+            <label class="txt" for="loginPass">Contraseña</label>
+            <input id="loginPass" type="password" placeholder="••••••••" minlength="6" required>
+          </div>
+          <!-- Botón de ejemplo; luego conéctalo a tu backend -->
+          <button class="submit" type="button">Entrar</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: REGISTRO -->
+  <div id="register" class="modal-backdrop" aria-hidden="true">
+    <div class="modal" role="dialog" aria-labelledby="registerTitle">
+      <div class="modal-header">
+        <strong id="registerTitle">Registro</strong>
+        <a class="close" href="#" aria-label="Cerrar">✕</a>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="row">
+            <div>
+              <label class="txt" for="regNombre">Nombre</label>
+              <input id="regNombre" type="text" placeholder="Nombre completo" required>
+            </div>
+            <div>
+              <label class="txt" for="regRut">RUT</label>
+              <input id="regRut" type="text" placeholder="12.345.678-9" required>
+            </div>
+          </div>
+          <div>
+            <label class="txt" for="regDireccion">Dirección</label>
+            <input id="regDireccion" type="text" placeholder="Calle, número, comuna" required>
+          </div>
+          <div>
+            <label class="txt" for="regEmail">Correo</label>
+            <input id="regEmail" type="email" placeholder="tucorreo@dominio.cl" required>
+          </div>
+          <div>
+            <label class="txt" for="regPass">Contraseña</label>
+            <input id="regPass" type="password" placeholder="Mínimo 6 caracteres" minlength="6" required>
+          </div>
+          <button class="submit" type="button">Crear cuenta</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
